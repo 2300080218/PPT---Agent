@@ -12,95 +12,109 @@ st.set_page_config(page_title="AI Slide Creator", page_icon="📝", layout="cent
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 html, body, [class*="css"] {
-    font-family: 'Outfit', sans-serif !important;
+    font-family: 'Inter', sans-serif !important;
 }
+
+/* Background & general text */
 .stApp {
-    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-    color: #e2e8f0;
+    background-color: #f8fafc;
+    color: #334155;
 }
+
+/* Typography */
 .hero-title {
     text-align: center; 
-    background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 900; 
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-    animation: fadeInDown 0.8s ease-out;
+    color: #0f172a;
+    font-weight: 800; 
+    font-size: 3rem;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.025em;
 }
 .sub-title { 
     text-align: center; 
-    color: #94a3b8; 
-    font-size: 1.2rem;
-    margin-bottom: 2.5rem; 
-    font-weight: 300;
+    color: #64748b; 
+    font-size: 1.1rem;
+    margin-bottom: 3rem; 
+    font-weight: 400;
 }
+
+/* Cards (Slides preview) */
 .card { 
-    background: rgba(255, 255, 255, 0.05); 
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px; 
-    padding: 24px; 
-    margin-bottom: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #ffffff; 
+    border: 1px solid #e2e8f0;
+    border-radius: 8px; 
+    padding: 24px 32px; 
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+    transition: box-shadow 0.2s ease;
 }
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
 }
 .slide-num { 
     font-size: 0.75rem; 
-    color: #a78bfa; 
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    color: #94a3b8; 
     font-weight: 600;
-    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
 }
 .slide-heading { 
-    font-size: 1.6rem; 
-    color: #f8fafc; 
+    font-size: 1.5rem; 
+    color: #0f172a; 
     margin-top: 0; 
-    margin-bottom: 15px; 
-    font-weight: 600;
+    margin-bottom: 16px; 
+    font-weight: 700;
+    letter-spacing: -0.015em;
 }
 .point { 
-    font-size: 1.05rem; 
-    color: #cbd5e1; 
+    font-size: 1rem; 
+    color: #475569; 
     margin-left: 20px; 
-    margin-bottom: 8px;
-    text-indent: -20px; 
-    line-height: 1.5;
+    margin-bottom: 10px;
+    text-indent: -18px; 
+    line-height: 1.6;
 }
 .point::before { 
-    content: "✦ "; 
-    color: #38bdf8; 
+    content: "• "; 
+    color: #2563eb; 
     font-size: 1.2rem;
+    font-weight: bold;
 }
-/* Form Styling Customizations */
+
+/* Forms & Inputs */
 div[data-testid="stForm"] {
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
     padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
+
+textarea:focus, input:focus {
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2) !important;
+}
+
+/* Primary Button */
 button[kind="secondaryFormSubmit"] {
-    background: linear-gradient(90deg, #6366f1, #8b5cf6) !important;
+    background-color: #0f172a !important;
     color: white !important;
     border: none !important;
-    border-radius: 8px !important;
-    padding: 0.5rem 2rem !important;
-    font-weight: 600 !important;
-    transition: opacity 0.2s !important;
+    border-radius: 6px !important;
+    padding: 0.6rem 2.5rem !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 button[kind="secondaryFormSubmit"]:hover {
-    opacity: 0.9 !important;
-}
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    background-color: #1e293b !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15) !important;
+    transform: translateY(-1px) !important;
 }
 </style>
 """, unsafe_allow_html=True)
