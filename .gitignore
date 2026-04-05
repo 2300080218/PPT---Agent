@@ -6,6 +6,8 @@ __pycache__/
 # Project generated files
 *.pptx
 streamlit_out.txt
+*.pdf
+REFLECTION.md
 
 # Virtual environments
 venv/
