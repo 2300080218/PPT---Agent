@@ -12,31 +12,33 @@ st.set_page_config(page_title="AI Slide Creator", page_icon="📝", layout="cent
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap');
 
 html, body, [class*="css"] {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Outfit', sans-serif !important;
 }
 
-/* Background & general text */
+/* Background & general text - Soft airy blueish white */
 .stApp {
-    background-color: #f8fafc;
+    background: radial-gradient(circle at top left, #ebf8ff 0%, #f4f7fb 100%);
     color: #334155;
 }
 
-/* Typography */
+/* Typography - Vibrant Professional Gradient */
 .hero-title {
     text-align: center; 
-    color: #0f172a;
+    background: linear-gradient(120deg, #1d4ed8, #0ea5e9, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-weight: 800; 
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 0.25rem;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
 }
 .sub-title { 
     text-align: center; 
-    color: #64748b; 
-    font-size: 1.1rem;
+    color: #475569; 
+    font-size: 1.15rem;
     margin-bottom: 3rem; 
     font-weight: 400;
 }
@@ -44,77 +46,81 @@ html, body, [class*="css"] {
 /* Cards (Slides preview) */
 .card { 
     background: #ffffff; 
-    border: 1px solid #e2e8f0;
-    border-radius: 8px; 
+    border-left: 4px solid #3b82f6;
+    border-top: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    border-radius: 12px; 
     padding: 24px 32px; 
-    margin-bottom: 16px;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-    transition: box-shadow 0.2s ease;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.05), 0 2px 4px -1px rgba(59, 130, 246, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-left-color 0.2s ease;
 }
 .card:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1), 0 4px 6px -2px rgba(59, 130, 246, 0.05);
+    border-left-color: #8b5cf6;
 }
 .slide-num { 
-    font-size: 0.75rem; 
-    color: #94a3b8; 
-    font-weight: 600;
+    font-size: 0.8rem; 
+    color: #8b5cf6; 
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 .slide-heading { 
-    font-size: 1.5rem; 
-    color: #0f172a; 
+    font-size: 1.6rem; 
+    color: #1e3a8a; 
     margin-top: 0; 
     margin-bottom: 16px; 
     font-weight: 700;
-    letter-spacing: -0.015em;
 }
 .point { 
-    font-size: 1rem; 
-    color: #475569; 
+    font-size: 1.05rem; 
+    color: #334155; 
     margin-left: 20px; 
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     text-indent: -18px; 
     line-height: 1.6;
 }
 .point::before { 
-    content: "• "; 
-    color: #2563eb; 
-    font-size: 1.2rem;
-    font-weight: bold;
+    content: "✨ "; 
+    font-size: 1rem;
 }
 
 /* Forms & Inputs */
 div[data-testid="stForm"] {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
 }
 
 textarea:focus, input:focus {
-    border-color: #2563eb !important;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2) !important;
+    border-color: #0ea5e9 !important;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2) !important;
 }
 
 /* Primary Button */
 button[kind="secondaryFormSubmit"] {
-    background-color: #0f172a !important;
+    background: linear-gradient(135deg, #2563eb, #6366f1) !important;
     color: white !important;
     border: none !important;
-    border-radius: 6px !important;
-    padding: 0.6rem 2.5rem !important;
-    font-weight: 500 !important;
-    font-size: 1rem !important;
-    transition: all 0.2s ease !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 0.7rem 2.5rem !important;
+    font-weight: 600 !important;
+    font-size: 1.05rem !important;
+    letter-spacing: 0.02em !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3) !important;
 }
 button[kind="secondaryFormSubmit"]:hover {
-    background-color: #1e293b !important;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15) !important;
-    transform: translateY(-1px) !important;
+    background: linear-gradient(135deg, #1d4ed8, #4f46e5) !important;
+    box-shadow: 0 8px 12px -2px rgba(37, 99, 235, 0.4) !important;
+    transform: translateY(-2px) !important;
 }
 </style>
 """, unsafe_allow_html=True)
