@@ -113,7 +113,7 @@ class DeckStructure(BaseModel):
     slide_content: List[SlideData]
 
 class CreateReq(BaseModel):
-    query: str = Field(..., min_length=5)
+    query: str = Field(...)
     total_slides: int = Field(5, ge=3, le=10)
 
 class ModifyReq(BaseModel):
