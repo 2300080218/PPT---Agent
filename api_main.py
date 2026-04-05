@@ -67,9 +67,10 @@ async def build_deck_pipeline(user_query: str) -> dict:
                                     
                                     slides = plan.get("slide_content", [])
                                     if not slides: raise RuntimeError("Plan is empty.")
+                                    theme = plan.get("theme", "professional").lower()
 
                                     # Initialize deck
-                                    await invoke_mcp(ppt_sess, "init_presentation", {"filename": TARGET_FILE})
+                                    await invoke_mcp(ppt_sess, "init_presentation", {"filename": TARGET_FILE, "theme": theme})
                                     
                                     # Add slides
                                     for idx, s in enumerate(slides, 1):

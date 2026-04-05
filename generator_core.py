@@ -33,6 +33,7 @@ OUTPUT EXACTLY ONE JSON OBJECT outlining the presentation content.
 Format:
 {
   "deck_title": "Main Title Here",
+  "theme": "professional | normal | aesthetic",
   "slide_content": [
     {
       "heading": "Slide 1 Title",
@@ -45,6 +46,10 @@ Instructions:
 1. First slide must be the title card.
 2. Following slides need 3-5 items each.
 3. Obey the exact number of slides requested.
+4. Select the most appropriate 'theme' based on the tone of the request:
+   - 'professional' for business, industry, or corporate topics.
+   - 'aesthetic' for creative, casual, or visually-focused topics.
+   - 'normal' for general educational or simple topics.
 Only output JSON, no extra text.
 """
 
@@ -133,13 +138,14 @@ async def orchestrate_creation(prompt_text: str, fs_client: ClientSession, slide
 
     slides_arr = structure.get("slide_content", [])
     overall_title = structure.get("deck_title", "Untitled Presentation")
+    detected_theme = structure.get("theme", "professional").lower()
     
     if not slides_arr:
         print(">> No slides found. Exiting.")
         return
 
-    print(">> Initializing PPTX backend...")
-    res = await invoke_mcp(slide_client, "init_presentation", {"filename": TARGET_FILE})
+    print(f">> Initializing {detected_theme} PPTX backend...")
+    res = await invoke_mcp(slide_client, "init_presentation", {"filename": TARGET_FILE, "theme": detected_theme})
     print(res)
 
     idx_count = 1
