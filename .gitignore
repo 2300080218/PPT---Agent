@@ -1,0 +1,12 @@
+# Environments
+.env
+__pycache__/
+*.pyc
+
+# Project generated files
+*.pptx
+streamlit_out.txt
+
+# Virtual environments
+venv/
+.venv/
